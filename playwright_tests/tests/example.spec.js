@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import FakeDetails from './fake-details';
 
 test( 'exercise', async ({page}) => {
   await page.goto ('https://demoqa.com/text-box')
@@ -16,16 +17,16 @@ test( 'exercise', async ({page}) => {
 });
 
 test( 'Practice Form', async ({ page }) => {
+  const details = new FakeDetails();
+
   await page.goto('https://demoqa.com/automation-practice-form');
 
-  await page.getByRole('textbox', {name: 'First Name'}).fill('Tomer');
-  await page.getByRole('textbox', {name: 'Last Name'}).fill('Kaplan');
-  await page.getByRole('textbox', {name: 'name@example.com'}).fill('tomer.kaplan2007@gmail.com');
-  await page.getByText('Male', { exact: 'true'});
-  await page.locator('div').filter({ hasText: /^Male$/ }).click();
-  await page.getByRole('textbox', {name: 'Mobile Number'}).fill('0542668824');
-  await page.locator('#dateOfBirthInput').fill('27 Nov 2007');
-  await page.locator('#subjectsInput').fill('bla bla bla');
+  await page.getByRole('textbox', {name: 'First Name'}).fill(details.name);
+  await page.getByRole('textbox', {name: 'Last Name'}).fill(details.lastName);
+  await page.getByRole('textbox', {name: 'name@example.com'}).fill(details.email);
+  await page.getByText(details.gender, {exact: true}).click();
+  await page.getByRole('textbox', {name: 'Mobile Number'}).fill(details.phoneNumber);
+  await page.getByText('Subjects').fill(details.sentence);
   await page.getByText('Sports').click();
   await page.getByText('Music').click();
   await page.getByRole('checkbox', {name: 'music'}).check();
@@ -45,3 +46,8 @@ test( 'hovering test', async ({ page }) => {
   await page.getByRole('button', {name: 'hover me to see'}).hover();
   await expect(page.getByText('You hovered over the button')).toBeVisible();
 });
+
+test( 'select menu test', async ({ page }) => {
+  await page.goto()
+});
+
