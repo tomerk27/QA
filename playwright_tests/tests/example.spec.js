@@ -38,3 +38,10 @@ test( 'slider test', async ({ page }) => {
   await page.getByRole('slider').fill('27');
   await expect(page.locator('#sliderValue')).toHaveValue('27');
 });
+
+test( 'hovering test', async ({ page }) => {
+  await page.goto('https://demoqa.com/tool-tips');
+
+  await page.getByRole('button', {name: 'hover me to see'}).hover();
+  await expect(page.getByText('You hovered over the button')).toBeVisible();
+});
