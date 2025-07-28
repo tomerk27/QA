@@ -5,7 +5,7 @@ test( 'Practice Form', async ({ page }) => {
   const devPage = new PlaywrightDevPage(page);
   await page.goto('https://demoqa.com/automation-practice-form');
 
-  devPage.fillDetails();
+  await devPage.fillDetails();
   await expect(page.getByText('Thanks for submitting the form')).not.toBeVisible()
 
   await page.locator('.subjects-auto-complete__value-container').click();

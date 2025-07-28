@@ -5,6 +5,7 @@ test( 'text box', async ({ page }) => {
     const devPage = new PlaywrightDevPage(page);
 
     await page.goto('https://demoqa.com/text-box');
-    devPage.fillDetails();
-    exep
+    await devPage.fillDetails();
+    await page.getByRole('button', { name: 'submit' }).click();
+    await expect(page.locator('#output')).toBeVisible();
 });

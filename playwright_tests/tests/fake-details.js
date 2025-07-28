@@ -18,6 +18,7 @@ class FakeDetails {
         year: 'numeric'
     });
     this.address = faker.location.streetAddress();
+    this.permanentAddress = faker.location.streetAddress();
   }
 }
 
