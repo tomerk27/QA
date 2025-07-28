@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker';
 
 class FakeDetails {
   constructor() {
-    this.name = faker.person.firstName();
+    this.firstName = faker.person.firstName();
     this.lastName = faker.person.lastName();
     this.phoneNumber = faker.string.numeric(10);
     this.email = faker.internet.email();
@@ -16,8 +16,8 @@ class FakeDetails {
         day: '2-digit',
         month: 'short',
         year: 'numeric'
-    })
-
+    });
+    this.address = faker.location.streetAddress();
   }
 }
 
