@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import FakeDetails from "./fake-details";
+import { de } from "@faker-js/faker";
 
 export class PlaywrightDevPage{
     constructor(page){
@@ -38,6 +39,12 @@ export class PlaywrightDevPage{
             await lastNameLocator.fill(details.lastName);
         }
 
+        // fill age field
+        const ageTextLocator = await this.page.getByText(/age/i);
+        if (await ageTextLocator.count() > 0) {
+            await ageTextLocator.locator('xpath=following::input[1]').fill(details.age);
+        }
+
         // fill email field
         const emailTextLocator = await this.page.getByText(/email/i);
         if (await emailTextLocator.count() > 0){
@@ -74,6 +81,20 @@ export class PlaywrightDevPage{
         if (await genderLocator.count() > 0) {
             await genderLocator.click();
         }
+        
+        // fill 'do you like the site?' filed
+        const questionTextLocator = await this.page.getByText('Do you like the site?');
+        if (await questionTextLocator.count() > 0) {
+            const words = ['Yes', 'Impressive'];
+            const randWord = words[Math.floor(Math.random()*words.length)];
+            await this.page.getByText(randWord).click();
+        }
 
+        // fill salary field
+        const salaryLocator = await this.page.getByText('Salary');
+        if (await salaryLocator.count() > 0) {
+            const salary = details.getNumberInRange(1000, 20000);
+            await salaryLocator.locator('xpath=following::input[1]').fill(salary);
+        }
     }
 }
