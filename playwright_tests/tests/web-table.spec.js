@@ -1,7 +1,7 @@
 import { PlaywrightDevPage } from "./playwright-dev-test";
 import { test, expect } from "@playwright/test";
 
-test ('web table', async ({ table }) => {
+test ('web table', async ({ page }) => {
     const devPage = new PlaywrightDevPage(page);
     
     await page.goto('https://demoqa.com/webtables');
